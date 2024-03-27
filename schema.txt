@@ -1,0 +1,38 @@
+CREATE TABLE social_medias (
+  id BIGINT PRIMARY KEY,
+  name VARCHAR(50) NOT NULL,
+  social_media_url TEXT NOT NULL,
+  user_id BIGINT REFERENCES users(id) NOT NULL,
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP
+);
+
+CREATE TABLE users (
+  id BIGINT PRIMARY KEY,
+  username VARCHAR(50) NOT NULL,
+  email VARCHAR(150) NOT NULL,
+  password TEXT NOT NULL,
+  age INT NOT NULL,
+  profile_image_url TEXT,
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP
+);
+
+CREATE TABLE photos (
+  id BIGINT PRIMARY KEY,
+  title VARCHAR(100) NOT NULL,
+  caption VARCHAR(200),
+  photo_url TEXT NOT NULL,
+  user_id BIGINT REFERENCES users(id) NOT NULL,
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP
+);
+
+CREATE TABLE comments (
+  id BIGINT PRIMARY KEY,
+  user_id BIGINT REFERENCES users(id) NOT NULL,
+  photo_id BIGINT REFERENCES photos(id) NOT NULL,
+  message VARCHAR(200) NOT NULL,
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP
+);
